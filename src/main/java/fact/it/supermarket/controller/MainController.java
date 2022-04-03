@@ -1,7 +1,15 @@
 package fact.it.supermarket.controller;
 
 
+import fact.it.supermarket.model.Customer;
+import org.springframework.scripting.support.StandardScriptEvalException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
@@ -11,6 +19,31 @@ public class MainController {
     private ArrayList<Supermarket> supermarketArrayList;
 */
 //    Write your code here
+
+    @RequestMapping(value = "/customer/addCustomer")
+    public String addCustomer(HttpServletRequest request, Model model){
+
+        try {
+
+            Customer newCustomer = new Customer(request.getParameter("firstName"), request.getParameter("surName"));
+            newCustomer.setYearOfBirth(Integer.parseInt(request.getParameter("yearOfBirth")));
+
+            System.out.println(newCustomer.getYearOfBirth());
+
+        }
+        catch (Exception e){
+            System.out.println("A non fatal error occurred in addCustomer at MainController");
+            System.out.println(e.toString());
+            return "1_newCustomer.html";
+        }
+        return "1_newCustomer.html";
+
+    }
+
+    @RequestMapping(value = "customer/newCustomer")
+    public String dishlist(){
+        return "1_newCustomer.html";
+    }
 
 
 
