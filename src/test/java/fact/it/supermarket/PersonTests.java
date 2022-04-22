@@ -18,10 +18,10 @@ public class PersonTests {
 
         Person leonie = new Person("Leonie", "Pelgroms");
         assertEquals("Leonie", leonie.getFirstName());
-        assertEquals("Pelgroms", leonie.getSurName());
+        assertEquals("Pelgroms", leonie.getSurname());
         Person person = new Person();
         assertNull(person.getFirstName());
-        assertNull(person.getSurName());
+        assertNull(person.getSurname());
     }
 
     /**
@@ -40,8 +40,8 @@ public class PersonTests {
     @Test
     public void testSetFamilienaam() {
         Person person = new Person();
-        person.setSurName("Caers");
-        assertEquals("Caers", person.getSurName());
+        person.setSurname("Caers");
+        assertEquals("Caers", person.getSurname());
     }
 
     /**

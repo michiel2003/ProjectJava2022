@@ -17,7 +17,7 @@ public class CustomerTests {
 
         Customer customer = new Customer("Donald", "Duck");
         assertEquals("Donald", customer.getFirstName());
-        assertEquals("Duck", customer.getSurName());
+        assertEquals("Duck", customer.getSurname());
         assertEquals(-1, customer.getCardNumber());
         assertEquals(0, customer.getYearOfBirth());
     }
@@ -38,8 +38,8 @@ public class CustomerTests {
     @Test
     public void testSetSurName() {
         Customer customer = new Customer("Donald", "Duck");
-        customer.setSurName("Mouse");
-        assertEquals("Mouse", customer.getSurName());
+        customer.setSurname("Mouse");
+        assertEquals("Mouse", customer.getSurname());
     }
 
     /**

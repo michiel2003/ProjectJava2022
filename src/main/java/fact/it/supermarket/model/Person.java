@@ -2,16 +2,14 @@
 // r0879855
 package fact.it.supermarket.model;
 
-import java.util.Locale;
-
 public class Person {
 
     private String firstName;
-    private String surName;
+    private String surname;
 
-    public Person(String firstName, String surName) {
+    public Person(String firstName, String surname) {
         this.firstName = firstName;
-        this.surName = surName;
+        this.surname = surname;
     }
 
     public Person(){}
@@ -24,19 +22,19 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
 
 
     @Override
     public String toString() {
-        return surName.toUpperCase() + " " +  firstName;
+        return surname.toUpperCase() + " " +  firstName;
     }
 
 

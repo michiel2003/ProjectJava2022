@@ -19,7 +19,7 @@ public class StaffTests {
     public void testConstructorEnGetters() {
         Staff employee = new Staff("Juul", "Kabas");
         assertEquals("Juul", employee.getFirstName());
-        assertEquals("Kabas", employee.getSurName());
+        assertEquals("Kabas", employee.getSurname());
         assertEquals(false, employee.isStudent());
         assertEquals(LocalDate.now(), employee.getStartDate());
     }

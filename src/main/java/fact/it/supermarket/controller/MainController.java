@@ -2,14 +2,14 @@ package fact.it.supermarket.controller;
 
 
 import fact.it.supermarket.model.Customer;
-import org.springframework.scripting.support.StandardScriptEvalException;
+import fact.it.supermarket.model.Staff;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class MainController {
@@ -25,10 +25,15 @@ public class MainController {
 
         try {
 
-            Customer newCustomer = new Customer(request.getParameter("firstName"), request.getParameter("surName"));
+            Customer newCustomer = new Customer(request.getParameter("firstName"), request.getParameter("surname"));
             newCustomer.setYearOfBirth(Integer.parseInt(request.getParameter("yearOfBirth")));
 
             System.out.println(newCustomer.getYearOfBirth());
+            System.out.println(newCustomer.getFirstName());
+            System.out.println(newCustomer.getSurname());
+            System.out.println("_____________");
+
+            model.addAttribute("Customer", newCustomer);
 
         }
         catch (Exception e){
@@ -36,14 +41,41 @@ public class MainController {
             System.out.println(e.toString());
             return "1_newCustomer.html";
         }
-        return "1_newCustomer.html";
+        return "2_CustomerWelcome.html";
 
     }
 
     @RequestMapping(value = "customer/newCustomer")
-    public String dishlist(){
+    public String newCustomer (){
         return "1_newCustomer.html";
     }
+
+    @RequestMapping(value = "/")
+    public String index(){
+        return "index.html";
+    }
+
+    @RequestMapping(value = "/staff/addStaffMember")
+    public String addStaffMember(HttpServletRequest request, Model model){
+        try{
+
+
+
+            Staff newStaff = new Staff(request.getParameter("firstName"), request.getParameter("surname"));
+
+            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("employedSince"));
+
+            newStaff.setStartDate();
+
+
+        }catch(Exception e){
+            System.out.println("A non fatal error occurred in addStaffMember at MainController");
+            System.out.println(e.toString());
+            return "3_NewStaffMember.html";
+        }
+    }
+
+//    
 
 
 

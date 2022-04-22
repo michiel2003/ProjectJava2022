@@ -4,7 +4,11 @@ h1{
     color: red;
 }
 
-.form{
-    display: flex;
-    flex-direction: column;
+body{
+    background-color: yellow;
+}
+
+form{
+    color: yellow;
+    background: red;
 }
