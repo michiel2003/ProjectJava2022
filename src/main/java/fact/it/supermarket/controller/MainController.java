@@ -65,7 +65,7 @@ public class MainController {
 
             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("employedSince"));
 
-            newStaff.setStartDate();
+//            newStaff.setStartDate();
 
 
         }catch(Exception e){
@@ -73,6 +73,7 @@ public class MainController {
             System.out.println(e.toString());
             return "3_NewStaffMember.html";
         }
+        return "3_NewStaffMember.html";
     }
 
 //    
@@ -130,13 +131,13 @@ public class MainController {
         customers.add(customer1);
         customers.add(customer2);
         customers.add(customer3);
-        customers.get(0).addToShoppinghList("Butter");
-        customers.get(0).addToShoppinghList("Bread");
-        customers.get(1).addToShoppinghList("Apple");
-        customers.get(1).addToShoppinghList("Banana");
-        customers.get(1).addToShoppinghList("Grapes");
-        customers.get(1).addToShoppinghList("Oranges");
-        customers.get(2).addToShoppinghList("Fish");
+        customers.get(0).addToShoppingList("Butter");
+        customers.get(0).addToShoppingList("Bread");
+        customers.get(1).addToShoppingList("Apple");
+        customers.get(1).addToShoppingList("Banana");
+        customers.get(1).addToShoppingList("Grapes");
+        customers.get(1).addToShoppingList("Oranges");
+        customers.get(2).addToShoppingList("Fish");
         return customers;
     }
 
