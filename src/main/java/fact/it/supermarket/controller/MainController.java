@@ -3,15 +3,23 @@ package fact.it.supermarket.controller;
 
 import fact.it.supermarket.model.Customer;
 import fact.it.supermarket.model.Staff;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
+@CrossOrigin(allowedHeaders = "*", origins =  "*")
 public class MainController {
 /*  You will need these ArrayLists in part 3 of the project assignment.
     private ArrayList<Staff> staffArrayList;
@@ -55,6 +63,11 @@ public class MainController {
         return "index.html";
     }
 
+    @RequestMapping(value = "/staff/newStaffMember")
+    public String newStaffMember(){
+        return "3_NewStaffMember.html";
+    }
+
     @RequestMapping(value = "/staff/addStaffMember")
     public String addStaffMember(HttpServletRequest request, Model model){
         try{
@@ -63,17 +76,28 @@ public class MainController {
 
             Staff newStaff = new Staff(request.getParameter("firstName"), request.getParameter("surname"));
 
-            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("employedSince"));
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-//            newStaff.setStartDate();
+            LocalDate date = LocalDate.parse(request.getParameter("employedSince"), dtf );
 
+            newStaff.setStartDate(date);
+
+            model.addAttribute("newStaff", newStaff);
+
+            List attributes = new ArrayList() {{
+                add(newStaff.getStartDate());
+                add(newStaff.getSurname());
+                add(newStaff.getFirstName());
+            }};
+            for (Object o: attributes){
+                System.out.println(o);
+            }
 
         }catch(Exception e){
             System.out.println("A non fatal error occurred in addStaffMember at MainController");
             System.out.println(e.toString());
-            return "3_NewStaffMember.html";
         }
-        return "3_NewStaffMember.html";
+        return "4_StaffMemberWelcome.html";
     }
 
 //    

@@ -24,11 +24,18 @@ input[type=text] {
 form{
     display: flex;
     flex-direction: column;
-    max-width: 1400px;
 }
 
 .formFlex{
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+body{
+    background: hotpink;
+}
+
+h1, h2{
+    color: blue;
 }
