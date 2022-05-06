@@ -39,3 +39,11 @@ body{
 h1, h2{
     color: blue;
 }
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    font-size: 20px;
+}

@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="supermarket" />
+        <module name="ProjectJava2022" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ProjectJava2022" options="-parameters" />
       <module name="supermarket" options="-parameters" />
     </option>
   </component>

@@ -2,31 +2,50 @@ package fact.it.supermarket.controller;
 
 
 import fact.it.supermarket.model.Customer;
+import fact.it.supermarket.model.Department;
 import fact.it.supermarket.model.Staff;
-import org.apache.tomcat.jni.Local;
+import fact.it.supermarket.model.Supermarket;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @CrossOrigin(allowedHeaders = "*", origins =  "*")
 public class MainController {
-/*  You will need these ArrayLists in part 3 of the project assignment.
     private ArrayList<Staff> staffArrayList;
     private ArrayList<Customer> customerArrayList;
     private ArrayList<Supermarket> supermarketArrayList;
-*/
+
 //    Write your code here
+
+    @PostConstruct
+    public void fillAll(){
+        staffArrayList = fillStaffMembers();
+        customerArrayList = fillCustomers();
+        supermarketArrayList = fillSupermarkets();
+
+    }
+
+    @RequestMapping(value = "/staff/allStaff")
+    public String allStaff(HttpServletRequest request, Model model){
+
+        model.addAttribute("staffArrayList", staffArrayList);
+
+
+
+
+        return "5_AllStaff.html";
+    }
+
 
     @RequestMapping(value = "/customer/addCustomer")
     public String addCustomer(HttpServletRequest request, Model model){
@@ -89,9 +108,6 @@ public class MainController {
                 add(newStaff.getSurname());
                 add(newStaff.getFirstName());
             }};
-            for (Object o: attributes){
-                System.out.println(o);
-            }
 
         }catch(Exception e){
             System.out.println("A non fatal error occurred in addStaffMember at MainController");
@@ -100,6 +116,9 @@ public class MainController {
         return "4_StaffMemberWelcome.html";
     }
 
+
+
+
 //    
 
 
@@ -107,7 +126,7 @@ public class MainController {
 
 
 
-/*You wll need these methods in part 3 of the project assignment
+//You wll need these methods in part 3 of the project assignment
     private ArrayList<Staff> fillStaffMembers() {
         ArrayList<Staff> staffMembers = new ArrayList<>();
 
@@ -191,6 +210,4 @@ public class MainController {
         supermarkets.add(supermarket3);
         return supermarkets;
     }
-
- */
 }

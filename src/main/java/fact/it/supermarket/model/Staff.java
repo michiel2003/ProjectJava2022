@@ -10,6 +10,8 @@ public class Staff extends Person{
     private LocalDate startDate;
     private boolean student;
 
+
+
     public Staff(String firstName, String surName){
         super(firstName, surName);
         this.startDate = LocalDate.now();

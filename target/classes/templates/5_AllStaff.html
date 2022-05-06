@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../img/style.css" />
+    <title>Our staff</title>
+</head>
+
+    <h1>Our staff</h1>
+    <ul>
+        <li th:each="staff : ${staffArrayList}" th:text="${staff.toString()}"></li>
+    </ul>
+
+<body>
+</body>
