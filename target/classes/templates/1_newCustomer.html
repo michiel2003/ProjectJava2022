@@ -12,13 +12,19 @@
 
 <div class="formFlex">
     <form method="post" action="/customer/addCustomer" class="form">
-
+        <label for="firstName">First name:</label>
         <input id="firstName" name="firstName" placeholder="Enter your first name" required type="text">
         <br>
+        <label for="surName">Surname:</label>
         <input id="surName" name="surname" placeholder="Enter your surname" required type="text">
         <br>
+        <label for="yearOfBirth">Birth year:</label>
         <input id="yearOfBirth" name="yearOfBirth" placeholder="Enter your date of birth" required type="text">
         <br>
+        <div th:each="supermarket : ${Supermarkets}">
+            <label th:for="${supermarket.getName()}" th:text="${supermarket.getName()}"></label>
+            <input th:checked="${supermarketStat.index} == 0" th:id="${supermarket.getName()}" type="radio" name="supermarket" th:value="${supermarket.getName()}">
+        </div>
 
         <input type="submit" value="Crate new customer">
 

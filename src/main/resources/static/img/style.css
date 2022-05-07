@@ -41,9 +41,13 @@ h1, h2{
 }
 
 ul{
-    list-style-type: none;
+    list-style-type: square;
 }
 
 li{
     font-size: 20px;
+}
+
+.formText{
+    margin: 2px;
 }

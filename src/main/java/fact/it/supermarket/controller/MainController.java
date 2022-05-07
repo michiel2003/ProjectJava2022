@@ -35,6 +35,15 @@ public class MainController {
 
     }
 
+    @RequestMapping(value = "/custome/allCustomer")
+    public String allCustomer(HttpServletRequest request, Model model){
+        model.addAttribute("customerArrayList", customerArrayList);
+
+
+
+        return "6_AllCustomers.html";
+    }
+
     @RequestMapping(value = "/staff/allStaff")
     public String allStaff(HttpServletRequest request, Model model){
 
@@ -62,6 +71,7 @@ public class MainController {
 
             model.addAttribute("Customer", newCustomer);
 
+
         }
         catch (Exception e){
             System.out.println("A non fatal error occurred in addCustomer at MainController");
@@ -73,7 +83,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "customer/newCustomer")
-    public String newCustomer (){
+    public String newCustomer (HttpServletRequest request, Model model){
+        model.addAttribute("Supermarkets", supermarketArrayList);
         return "1_newCustomer.html";
     }
 
@@ -181,6 +192,13 @@ public class MainController {
         customers.get(1).addToShoppingList("Grapes");
         customers.get(1).addToShoppingList("Oranges");
         customers.get(2).addToShoppingList("Fish");
+
+        Customer me = new Customer("Michiel", "De Cap");
+        me.setYearOfBirth(2003);
+        customers.add(me);
+        customers.get(3).addToShoppingList("Milk");
+        customers.get(3).addToShoppingList("Orange juice");
+
         return customers;
     }
 
