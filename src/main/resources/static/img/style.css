@@ -1,5 +1,5 @@
 input[type=button], input[type=submit], input[type=reset] {
-    background-color: cyan;
+    background-color: darkred;
     border: none;
     border-radius: 30px;
     color: white;
@@ -12,10 +12,11 @@ input[type=button], input[type=submit], input[type=reset] {
 input[type=text] {
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid lightsalmon;
     border-radius: 4px;
+    color: white;
     font-size: 16px;
-    background-color: white;
+    background-color: darkred;
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
@@ -33,11 +34,11 @@ form{
 }
 
 body{
-    background: hotpink;
+    background: orange;
 }
 
 h1, h2{
-    color: blue;
+    color: red;
 }
 
 ul{
@@ -50,4 +51,8 @@ li{
 
 .formText{
     margin: 2px;
+}
+
+a{
+    font-size: 20px;
 }

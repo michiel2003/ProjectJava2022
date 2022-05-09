@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../img/style.css" />
-    <title>Welcome staff member</title>
+    <title></title>
 </head>
-
 <body>
 
-    <header>
-        <h1 th:text="${'Welcome ' + newStaff.toString()}"></h1>
-    </header>
+    <h1 th:text="'departments of ' + ${superMarket.getName()} + ':'"></h1>
+
+    <ul th:each="department : ${superMarket.getDepartmentList()} ">
+        <li th:text="${department.getName()}"></li>
+    </ul>
 
     <a href="/">Back to home page</a>
+
+
 </body>
+</html>

@@ -9,7 +9,7 @@
 
 <body>
 
-
+<h1>New customer:</h1>
 <div class="formFlex">
     <form method="post" action="/customer/addCustomer" class="form">
         <label for="firstName">First name:</label>
@@ -23,7 +23,7 @@
         <br>
         <div th:each="supermarket : ${Supermarkets}">
             <label th:for="${supermarket.getName()}" th:text="${supermarket.getName()}"></label>
-            <input th:checked="${supermarketStat.index} == 0" th:id="${supermarket.getName()}" type="radio" name="supermarket" th:value="${supermarket.getName()}">
+            <input th:checked="${supermarketStat.index} == 0" id="superMarket" type="radio" name="superMarket" th:value="${supermarket.getName()}">
         </div>
 
         <input type="submit" value="Crate new customer">

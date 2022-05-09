@@ -6,6 +6,7 @@ import fact.it.supermarket.model.Department;
 import fact.it.supermarket.model.Staff;
 import fact.it.supermarket.model.Supermarket;
 
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,7 +70,24 @@ public class MainController {
             System.out.println(newCustomer.getSurname());
             System.out.println("_____________");
 
+            String selectedSuperMarket = request.getParameter("superMarket");
+
+            Supermarket selectedSuperMarketInList = new Supermarket("Impossible");
+
+            for(Supermarket supermarket : supermarketArrayList){
+                if(supermarket.getName().equals(selectedSuperMarket)){
+                    selectedSuperMarketInList = supermarket;
+                }
+            }
+
+            selectedSuperMarketInList.registerCustomer(newCustomer);
+
+            System.out.println(selectedSuperMarket);
+
             model.addAttribute("Customer", newCustomer);
+
+            customerArrayList.add(newCustomer);
+
 
 
         }
@@ -98,9 +116,29 @@ public class MainController {
         return "3_NewStaffMember.html";
     }
 
+    @RequestMapping(value = "/supermarket/newSupermarket")
+    public String newSuperMarket(HttpServletRequest request, Model model){
+        return "7_NewSuperMarket.html";
+    }
+
+    @RequestMapping(value = "/supermarket/addSuperMarket")
+    public String addSuperMarket(HttpServletRequest request, Model model){
+        Supermarket newMarket = new Supermarket(request.getParameter("superMarketName"));
+        supermarketArrayList.add(newMarket);
+
+        model.addAttribute("SuperMarkets", supermarketArrayList);
+
+        return "8_AllSuperMarkets.html";
+    }
+
+    @RequestMapping(value = "/supermarket/allSuperMarkets")
+    public String allSuperMarkets(HttpServletRequest request, Model model){
+        model.addAttribute("SuperMarkets", supermarketArrayList);
+        return "8_AllSuperMarkets.html";
+    }
+
     @RequestMapping(value = "/staff/addStaffMember")
     public String addStaffMember(HttpServletRequest request, Model model){
-        try{
 
 
 
@@ -110,21 +148,84 @@ public class MainController {
 
             LocalDate date = LocalDate.parse(request.getParameter("employedSince"), dtf );
 
+            String isStudent = request.getParameter("student");
+
+            if (isStudent == null){
+                newStaff.setStudent(false);
+            }else if(isStudent.equals("on")){
+                newStaff.setStudent(true);
+            }
+
             newStaff.setStartDate(date);
 
             model.addAttribute("newStaff", newStaff);
 
-            List attributes = new ArrayList() {{
-                add(newStaff.getStartDate());
-                add(newStaff.getSurname());
-                add(newStaff.getFirstName());
-            }};
-
-        }catch(Exception e){
-            System.out.println("A non fatal error occurred in addStaffMember at MainController");
-            System.out.println(e.toString());
-        }
+            staffArrayList.add(newStaff);
         return "4_StaffMemberWelcome.html";
+    }
+
+    @RequestMapping(value = "department/newDepartment")
+    public String newDepartment(HttpServletRequest request, Model model){
+        model.addAttribute("SuperMarkets", supermarketArrayList);
+        model.addAttribute("staffMembers", staffArrayList);
+        return "9_NewDepartment.html";
+    }
+
+    @RequestMapping(value = "department/addDepartment")
+    public String addDepartment(HttpServletRequest request, Model model){
+        Staff staff = null;
+        Supermarket supermarket = null;
+
+        try {
+            model.addAttribute("SuperMarkets", supermarketArrayList);
+            model.addAttribute("staffMembers", staffArrayList);
+            String staffToString = request.getParameter("departmentResponsible");
+            String superMarketToString = request.getParameter("departmentSuperMarket");
+            String photo = request.getParameter("departmentPhoto");
+            String isRefrigerated = request.getParameter("departmentRefrigerated");
+            String departmentName = request.getParameter("departmentName");
+
+
+            for (Staff compare : staffArrayList) {
+                if (compare.toString().equals(staffToString)) {
+                    staff = compare;
+                }
+            }
+
+            for (Supermarket compare : supermarketArrayList) {
+                if (compare.toString().equals(superMarketToString)) {
+                    supermarket = compare;
+                }
+            }
+
+            Department department = new Department();
+            department.setResponsible(staff);
+            department.setPhoto(photo);
+
+            System.out.println(isRefrigerated);
+
+            if (isRefrigerated == null) {
+                department.setRefrigerated(false);
+            } else if (isRefrigerated.equals("on")) {
+                department.setRefrigerated(true);
+            }
+
+            department.setName(departmentName);
+
+            supermarket.addDepartment(department);
+
+            model.addAttribute("superMarket", supermarket);
+
+            return "10_SuperMarketDepartments.html";
+        }catch(Exception e){
+            if(staff == null){
+                model.addAttribute("error", "No staff was selected!!!");
+            }else {
+                model.addAttribute("error", "No supermarket was selected!!!");
+            }
+
+            return "error.html";
+        }
     }
 
 

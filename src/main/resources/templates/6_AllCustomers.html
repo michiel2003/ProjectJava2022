@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../img/style.css" />
     <title></title>
 </head>
-
+<body>
+    <h1>Our customers:</h1>
     <ol>
         <li th:each="customer : ${customerArrayList}" >
             <p class="formText" th:text="${customer.getFirstName() + ' ' + customer.getSurname()}"></p>
@@ -31,5 +32,4 @@
 
 
     <a href="/">Back to homepage</a>
-<body>
 </body>

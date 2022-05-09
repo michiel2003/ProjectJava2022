@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../img/style.css" />
+    <title>New department</title>
+</head>
+<body>
+
+    <h1>New department:</h1>
+    <div class="formFlex">
+        <form class="for" method="post" action="/department/addDepartment">
+
+            <label for="departmentName">Department name: </label>
+            <input type="text" id="departmentName" name="departmentName" placeholder="Department name"><br>
+            <label for="departmentPhoto">Department photo: </label>
+            <input type="text" id="departmentPhoto" name="departmentPhoto" placeholder="Department photo"><br>
+            <label for="departmentRefrigerated">Is refrigerated: </label>
+            <input type="checkbox" id="departmentRefrigerated" name="departmentRefrigerated"><br>
+            <label for="departmentSuperMarket">What supermarket has this department: </label>
+            <select name="departmentSuperMarket" id="departmentSuperMarket">
+                <option value="default">For which supermarket:</option>
+                <option th:each="supermarket : ${SuperMarkets}" th:value="${supermarket}" th:text="${supermarket.getName()}"></option>
+            </select><br>
+            <label for="departmentResponsible">Who is responsilbe for this department:</label>
+            <select name="departmentResponsible" id="departmentResponsible">
+                <option value="default">Who is responsible</option>
+                <option th:each="staff : ${staffMembers}" th:value="${staff}" th:text="${staff.getFirstName() + ' ' + staff.getSurname()}"</option>
+            </select><br>
+
+
+            <input type="submit" value="Submit new department">
+
+        </form>
+
+
+
+    </div>
+
+    <a href="/">Back to home page</a>
+
+
+</body>
+</html>
