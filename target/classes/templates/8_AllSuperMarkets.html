@@ -9,8 +9,8 @@
 
     <h1>Supermarkets (and number of departments):</h1>
 
-    <ul th:each="supermarket : ${SuperMarkets} ">
-        <li> <a href="department/addDepartment" th:value="${supermarket}" th:text="${supermarket.getName() + ' (' + supermarket.getNumberOfDepartments() + ')'}" ></a> </li>
+    <ul>
+        <li th:each="supermarket : ${SuperMarkets} "> <a th:href="@{/supermarket/viewDepartments(index=${supermarketStat.index})}" th:text="${supermarket.getName() + ' (' + supermarket.getNumberOfDepartments() + ')'}" ></a> </li>
     </ul>
 
     <a href="/">Back to home page</a>

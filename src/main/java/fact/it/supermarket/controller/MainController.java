@@ -33,7 +33,6 @@ public class MainController {
         staffArrayList = fillStaffMembers();
         customerArrayList = fillCustomers();
         supermarketArrayList = fillSupermarkets();
-
     }
 
     @RequestMapping(value = "/custome/allCustomer")
@@ -226,6 +225,33 @@ public class MainController {
 
             return "error.html";
         }
+    }
+
+    @RequestMapping("/supermarket/viewDepartments")
+    public String viewDepartments(HttpServletRequest request, Model model){
+
+        Integer index = Integer.parseInt(request.getParameter("index"));
+
+        model.addAttribute("superMarket", supermarketArrayList.get(index));
+
+        return "10_SuperMarketDepartments.html";
+    }
+
+    @RequestMapping("/departments/search")
+    public String searchDepartments(HttpServletRequest request, Model model){
+        String searchVal = request.getParameter("searchVal");
+        Department departmentFound;
+
+        for(Supermarket supermarket: supermarketArrayList){
+            Department found = supermarket.searchDepartmentByName(searchVal);
+            if (found != null){
+                model.addAttribute("department", found);
+                return "11_ViewDepartment.html";
+            }
+        }
+
+        model.addAttribute("error", "There is no department named '" + searchVal + "'");
+        return "error.html";
     }
 
 

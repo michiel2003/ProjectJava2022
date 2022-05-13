@@ -9,9 +9,16 @@
 
     <h1 th:text="'departments of ' + ${superMarket.getName()} + ':'"></h1>
 
-    <ul th:each="department : ${superMarket.getDepartmentList()} ">
-        <li th:text="${department.getName()}"></li>
-    </ul>
+    <ol>
+        <li th:each="department : ${superMarket.getDepartmentList()}"><p  th:text="${department.getName()}"></p>
+            <ul>
+                <li><p th:text="${department.getResponsible().getFirstName() + ' ' + department.getResponsible().getSurname()}"></p>
+                    <img onerror="this.src='../img/noimage.jpg'" th:src="@{${department.getPhoto()}}">
+                </li>
+
+            </ul>
+        </li>
+    </ol>
 
     <a href="/">Back to home page</a>
 
